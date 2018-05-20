@@ -1,0 +1,60 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Example BFF API",
+    "version": "1.0.0",
+    "title": "Example BFF API",
+    "contact": {
+      "email": "georg.wittberger@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "basePath": "/v1",
+  "schemes": [
+    "http"
+  ],
+  "tags": [{
+    "name": "bff",
+    "description": "BFF API"
+  }],
+  "paths": {
+    "/message": {
+      "get": {
+        "summary": "Returns the message",
+        "description": "Returns the message",
+        "operationId": "getMessage",
+        "tags": ["bff"],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "500": {
+            "description": "Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Message": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "text"
+      ]
+    }
+  }
+}

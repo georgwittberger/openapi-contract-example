@@ -1,0 +1,33 @@
+{
+  "name": "openapi-contract-frontend-application",
+  "version": "1.0.0",
+  "description": "TypeScript-based frontend application consuming the backend-for-frontend API via HTTP client generated directly from OpenAPI specification",
+  "author": "Georg Wittberger <georg.wittberger@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf dist",
+    "generate:api": "node generate-api-client.js",
+    "start": "npm run generate:api && cross-env TS_NODE_PROJECT=webpack.tsconfig.json webpack-dev-server",
+    "build": "npm run generate:api && cross-env TS_NODE_PROJECT=webpack.tsconfig.json webpack"
+  },
+  "dependencies": {
+    "superagent": "^3.8.3"
+  },
+  "devDependencies": {
+    "@types/html-webpack-plugin": "^2.30.3",
+    "@types/node": "^10.1.2",
+    "@types/superagent": "^3.5.8",
+    "@types/webpack": "^4.4.0",
+    "cross-env": "^5.1.5",
+    "html-webpack-plugin": "^3.2.0",
+    "rimraf": "^2.6.2",
+    "swagger-typescript-codegen": "^1.4.1",
+    "ts-loader": "^4.3.0",
+    "ts-node": "^6.0.3",
+    "tsconfig-paths": "^3.3.2",
+    "typescript": "^2.8.3",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3",
+    "webpack-dev-server": "^3.1.4"
+  }
+}

@@ -1,0 +1,6 @@
+server:
+  port: 10081
+  servlet:
+    context-path: /v1
+messages:
+  service-url: http://localhost:10082/v1
