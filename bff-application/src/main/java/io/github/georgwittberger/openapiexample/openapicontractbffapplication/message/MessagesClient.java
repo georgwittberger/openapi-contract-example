@@ -3,6 +3,6 @@ package io.github.georgwittberger.openapiexample.openapicontractbffapplication.m
 import io.github.georgwittberger.openapiexample.openapicontractmicroserviceapplication.api.client.MessagesApi;
 import org.springframework.cloud.openfeign.FeignClient;
 
-@FeignClient(value = "messages", url = "${messages.service-url}")
+@FeignClient("messages")
 public interface MessagesClient extends MessagesApi {
 }

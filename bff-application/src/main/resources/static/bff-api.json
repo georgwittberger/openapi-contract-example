@@ -17,8 +17,8 @@
     "http"
   ],
   "tags": [{
-    "name": "bff",
-    "description": "BFF API"
+    "name": "message",
+    "description": "Message API"
   }],
   "paths": {
     "/message": {
@@ -26,7 +26,7 @@
         "summary": "Returns the message",
         "description": "Returns the message",
         "operationId": "getMessage",
-        "tags": ["bff"],
+        "tags": ["message"],
         "produces": [
           "application/json"
         ],

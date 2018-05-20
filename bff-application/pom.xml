@@ -82,6 +82,7 @@
             </goals>
             <configuration>
               <inputSpec>${basedir}/src/main/resources/static/bff-api.json</inputSpec>
+              <templateDirectory>${basedir}/src/main/openapi/templates</templateDirectory>
               <language>spring</language>
               <invokerPackage>io.github.georgwittberger.openapiexample.openapicontractbffapplication.api
               </invokerPackage>

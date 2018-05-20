@@ -1,4 +1,2 @@
 server:
   port: 10082
-  servlet:
-    context-path: /v1

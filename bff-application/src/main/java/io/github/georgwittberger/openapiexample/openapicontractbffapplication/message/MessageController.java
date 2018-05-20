@@ -1,6 +1,6 @@
 package io.github.georgwittberger.openapiexample.openapicontractbffapplication.message;
 
-import io.github.georgwittberger.openapiexample.openapicontractbffapplication.api.handler.BffApi;
+import io.github.georgwittberger.openapiexample.openapicontractbffapplication.api.handler.MessageApi;
 import io.github.georgwittberger.openapiexample.openapicontractbffapplication.api.model.Message;
 import io.github.georgwittberger.openapiexample.openapicontractmicroserviceapplication.api.model.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class MessageController implements BffApi {
+public class MessageController implements MessageApi {
   private MessagesClient messagesClient;
 
   @Autowired
