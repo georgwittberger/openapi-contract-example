@@ -1,0 +1,65 @@
+= OpenAPI Contract Example
+Georg Wittberger <georg.wittberger@gmail.com>
+v1.0.0, 2018-05-21
+
+This example project demonstrates how to connect a browser-based frontend application, a backend-for-frontend application and a microservice application via HTTP interfaces using contract-first https://swagger.io/specification/[OpenAPI specifications] and automatic code generation.
+
+== Getting started
+
+=== Prerequisites
+
+* Java Development Kit 10 (or higher)
+* Node.js 8.9.x and NPM 5.6.x (or higher)
+
+=== Running the example
+
+. Clone the Git repository.
+. Open a terminal in the subdirectory `microservice-application` and run `mvnw spring-boot:run`. This will start the microservice on local port 10082.
+. Open a terminal in the subdirectory `bff-application` and run `mvnw spring-boot:run`. This will start the BFF on local port 10081.
+. Open a terminal in the subdirectory `frontend-application`, then first run `npm install` and then `npm start`. This will start a HTTP server for the frontend on local port 10080.
+. Open your browser and navigate to http://localhost:10080/
+
+== The microservice application
+
+The https://projects.spring.io/spring-boot/[Spring Boot] application in the subdirectory `microservice-application` represents a backend service which provides a rather general http://jsonapi.org/[JSON-API] for a specific business domain - in this example an API to retrieve messages.
+
+Characteristics of this application:
+
+* The provided JSON-API is defined using the OpenAPI specification file `src/main/resources/static/microservice-api.json`. The file is intentionally located inside the `static` directory to have it automatically provided by the Spring Boot application at http://localhost:10082/microservice-api.json
+* During the Maven build process the `swagger-codegen-maven-plugin` is used to generate a Spring controller interface from that microservice specification file. The methods in that interface are generated with `@RequestMapping` annotations matching the operations of the OpenAPI specification file.
+* The Spring interface generation is customized by the Mustache template located at `src/main/openapi/templates/api.mustache` (see https://github.com/swagger-api/swagger-codegen/blob/v2.3.1/modules/swagger-codegen/src/main/resources/JavaSpring/api.mustache[original file] for comparison). This template is customized to have the `basePath` of the OpenAPI specification included in the `@RequestMapping` annotations. This way it is guaranteed that API endpoints are provided at the correct versioned path without any extra configuration.
+* The generated Spring interface is implemented by the `MessagesController` class.
+
+== The backend-for-frontend application
+
+The https://projects.spring.io/spring-boot/[Spring Boot] application in the subdirectory `bff-application` represents a frontend-oriented API gateway - also called a backend-for-frontend (BFF) - which provides a simple API in JSON format to allow the frontend application to retrieve a view on the data which is really required by the frontend - in this example only the plain text of a specific message (without any technical data like ID). The message data is loaded via request to the microservice application and transformed to the simpler view model.
+
+Characteristics of this application:
+
+* The provided API is defined using the OpenAPI specification file `src/main/resources/static/bff-api.json`. The file is intentionally located inside the `static` directory to have it automatically provided by the Spring Boot application at http://localhost:10081/bff-api.json
+* During the Maven build process the `swagger-codegen-maven-plugin` is used to generate a Spring controller interface from that BFF specification file. The methods in that interface are generated with `@RequestMapping` annotations matching the operations of the OpenAPI specification file.
+* The Spring interface generation is customized by the Mustache template located at `src/main/openapi/templates/api.mustache` (see https://github.com/swagger-api/swagger-codegen/blob/v2.3.1/modules/swagger-codegen/src/main/resources/JavaSpring/api.mustache[original file] for comparison). This template is customized to have the `basePath` of the OpenAPI specification included in the `@RequestMapping` annotations. This way it is guaranteed that API endpoints are provided at the correct versioned path without any extra configuration.
+* The generated Spring interface is implemented by the `MessageController` class.
+* The consumed JSON-API of the microservice is defined by the OpenAPI specification file `src/main/openapi/microservice-api.json`. This is an exact copy of the file from the microservice application. This way it is always well-defined which interface version of the microservice is required by the BFF.
+* During the Maven build process the `swagger-codegen-maven-plugin` is used to generate a Java interface from that microservice specification file. The methods in that interface are generated with `@RequestMapping` annotations which are compliant with the OpenAPI specification file.
+* The Java interface generation is also customized by the Mustache template located at `src/main/openapi/templates/api.mustache`. The template is customized to include the `basePath` of the microservice API into the `@RequestMapping` annotations and to get rid of the Java 8 default method generation. _Important note: Java interfaces intended to be used as OpenFeign clients MUST NOT use default method implementations because the real client code would not be executed!_
+* The generated Java interface is extended by the `MessagesClient` interface to implement an OpenFeign client named "messages" which is used by the BFF to load the message data from the microservice. This client is always compliant with the OpenAPI specification of the microservice in terms of URL paths, parameters and request/response bodies. Only the server domain needs to be configured via `application.yaml` or it can even be discovered using Spring Cloud's service discovery mechanism.
+
+== The frontend application
+
+The frontend application in the subdirectory `frontend-application` represents a browser-based JavaScript application which makes use of the API exposed by the BFF application to display that server-provided data on the web page. The application code is written in https://www.typescriptlang.org/[TypeScript] and packaged into a JavaScript bundle using https://webpack.js.org/[Webpack].
+
+Characteristics of this application:
+
+* The consumed API of the BFF is defined by the OpenAPI specification file `src/api/bff-api.json`. This is an exact copy of the file from the BFF application. This way it is always well-defined which interface version of the BFF is required by the frontend.
+* The `swagger-typescript-codegen` module is used in the build script `generate-api-client.js` to generate a HTTP client from that BFF specification file. As a result it produces the TypeScript class `BFFClient` which is used by the application to call the API of the BFF.
+* The HTTP client generation is customized by the Mustache template located at `src/api/method.mustache` (see https://github.com/mtennoe/swagger-typescript-codegen/blob/master/templates/method.mustache[original file] for comparison). The template is customized to include the `basePath` of the BFF API in the client code. This client is always compliant with the OpenAPI specification of the BFF in terms of URL paths and parameters.
+* The main module `src/index.ts` imports the generated `BFFClient` module and uses it to retrieve the message text from the BFF.
+
+== Conclusion
+
+Modern web APIs can be easily defined using the OpenAPI specification. The specification files can be used to generate source code which helps to implement API compliant servers and clients. Additionally, having the interface specifications for both the provided and consumed APIs inside each application makes it easy to find out which versions of connected applications can play together.
+
+== License
+
+https://opensource.org/licenses/MIT[MIT]
