@@ -25,7 +25,7 @@ The https://projects.spring.io/spring-boot/[Spring Boot] application in the subd
 
 Characteristics of this application:
 
-* The provided JSON-API is defined using the OpenAPI specification file `src/main/resources/static/microservice-api.json`. The file is intentionally located inside the `static` directory to have it automatically provided by the Spring Boot application at http://localhost:10082/microservice-api.json
+* The provided JSON-API is defined using the OpenAPI specification file `src/main/resources/static/v1/microservice-api.json`. The file is intentionally located inside the `static` directory to have it automatically provided by the Spring Boot application at http://localhost:10082/v1/microservice-api.json
 * During the Maven build process the `swagger-codegen-maven-plugin` is used to generate a Spring controller interface from that microservice specification file. The methods in that interface are generated with `@RequestMapping` annotations matching the operations of the OpenAPI specification file.
 * The Spring interface generation is customized by the Mustache template located at `src/main/openapi/templates/api.mustache` (see https://github.com/swagger-api/swagger-codegen/blob/v2.3.1/modules/swagger-codegen/src/main/resources/JavaSpring/api.mustache[original file] for comparison). This template is customized to have the `basePath` of the OpenAPI specification included in the `@RequestMapping` annotations. This way it is guaranteed that API endpoints are provided at the correct versioned path without any extra configuration.
 * The generated Spring interface is implemented by the `MessagesController` class.
@@ -36,7 +36,7 @@ The https://projects.spring.io/spring-boot/[Spring Boot] application in the subd
 
 Characteristics of this application:
 
-* The provided API is defined using the OpenAPI specification file `src/main/resources/static/bff-api.json`. The file is intentionally located inside the `static` directory to have it automatically provided by the Spring Boot application at http://localhost:10081/bff-api.json
+* The provided API is defined using the OpenAPI specification file `src/main/resources/static/v1/bff-api.json`. The file is intentionally located inside the `static` directory to have it automatically provided by the Spring Boot application at http://localhost:10081/v1/bff-api.json
 * During the Maven build process the `swagger-codegen-maven-plugin` is used to generate a Spring controller interface from that BFF specification file. The methods in that interface are generated with `@RequestMapping` annotations matching the operations of the OpenAPI specification file.
 * The Spring interface generation is customized by the Mustache template located at `src/main/openapi/templates/api.mustache` (see https://github.com/swagger-api/swagger-codegen/blob/v2.3.1/modules/swagger-codegen/src/main/resources/JavaSpring/api.mustache[original file] for comparison). This template is customized to have the `basePath` of the OpenAPI specification included in the `@RequestMapping` annotations. This way it is guaranteed that API endpoints are provided at the correct versioned path without any extra configuration.
 * The generated Spring interface is implemented by the `MessageController` class.

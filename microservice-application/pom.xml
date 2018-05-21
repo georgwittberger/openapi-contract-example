@@ -63,7 +63,7 @@
               <goal>generate</goal>
             </goals>
             <configuration>
-              <inputSpec>${basedir}/src/main/resources/static/microservice-api.json</inputSpec>
+              <inputSpec>${basedir}/src/main/resources/static/v1/microservice-api.json</inputSpec>
               <templateDirectory>${basedir}/src/main/openapi/templates</templateDirectory>
               <language>spring</language>
               <invokerPackage>io.github.georgwittberger.openapiexample.openapicontractmicroserviceapplication.api
