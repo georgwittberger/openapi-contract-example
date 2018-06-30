@@ -1,6 +1,6 @@
 = OpenAPI Contract Example
 Georg Wittberger <georg.wittberger@gmail.com>
-v1.1.0, 2018-06-30
+v1.2.0, 2018-07-01
 
 This example project demonstrates how to connect a browser-based frontend application, a backend-for-frontend application and a microservice application via HTTP interfaces using contract-first https://github.com/OAI/OpenAPI-Specification/[OpenAPI specifications] and automatic code generation.
 
@@ -79,6 +79,21 @@ The frontend application in the subdirectory `frontend-application` represents a
 * Automatically generating the HTTP client in TypeScript ensures that the frontend always uses a client implementation which is compliant with the OpenAPI specification file. As soon as the operations, parameters or message data structures are modified the frontend is forced to adapt to these changes.
 * TypeScript is a crucial tool decision to make sure that correct interaction of the frontend business logic with the generated HTTP client is checked already at compile time.
 * The embedded Maven build is required to stick with the official OpenAPI tooling for code generation. All pure Node.js based generators were not really ready for OpenAPI 3.0 at the time of this writing.
+
+== The Swagger UI server
+
+The subdirectory `spec-server` contains a small http://expressjs.com/[ExpressJS] application which can be used to serve the Swagger UI for multiple OpenAPI specification files. This can be helpful for development teams to have an overview of all the available APIs and gives them a nice view of the specifications.
+
+=== Starting the server
+
+. Open a terminal in the subdirectory `spec-server`, then first run `npm install` and then `npm start`. This will start the ExpressJS server on local port 3000.
+. Open your browser and navigate to http://localhost:3000/
+
+=== Adding specifications
+
+The OpenAPI specifications selectable in the Swagger UI are located in the subdirectory `specs` of the server application. More specs can be added by simply placing files in this directory.
+
+_Note that the server must be restarted for new files to appear in the list._
 
 == Conclusion
 

@@ -1,0 +1,16 @@
+{
+  "name": "openapi-contract-example-spec-server",
+  "version": "1.0.0",
+  "description": "Express application serving Swagger UI for multiple OpenAPI specifications",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Georg Wittberger <georg.wittberger@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mustache-express": "^1.2.7",
+    "swagger-ui-dist": "^3.17.2"
+  }
+}

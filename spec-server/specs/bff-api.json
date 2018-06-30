@@ -1,0 +1,71 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Example BFF API",
+    "description": "Example BFF API",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Georg Wittberger",
+      "email": "georg.wittberger@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "/api/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "messages",
+      "description": "Messages API"
+    }
+  ],
+  "paths": {
+    "/message": {
+      "get": {
+        "summary": "Returns the message",
+        "description": "Returns the message",
+        "operationId": "getMessage",
+        "tags": [
+          "messages"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/MessageResponse"
+          },
+          "500": {
+            "description": "Error response"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "MessageResponse": {
+        "description": "Successful response with the message",
+        "content": {
+          "application/json": {
+            "schema": {
+              "title": "MessageResponse",
+              "description": "View model of the message",
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "text"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
