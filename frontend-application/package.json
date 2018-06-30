@@ -6,28 +6,26 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf dist",
-    "generate:api": "node generate-api-client.js",
+    "generate:api": "mvnw generate-sources",
     "start": "npm run generate:api && cross-env TS_NODE_PROJECT=webpack.tsconfig.json webpack-dev-server",
     "build": "npm run generate:api && cross-env TS_NODE_PROJECT=webpack.tsconfig.json webpack"
   },
   "dependencies": {
-    "superagent": "^3.8.3"
+    "portable-fetch": "^3.0.0"
   },
   "devDependencies": {
     "@types/html-webpack-plugin": "^2.30.3",
-    "@types/node": "^10.1.2",
-    "@types/superagent": "^3.5.8",
-    "@types/webpack": "^4.4.0",
-    "cross-env": "^5.1.5",
+    "@types/node": "^10.5.1",
+    "@types/webpack": "^4.4.4",
+    "cross-env": "^5.2.0",
     "html-webpack-plugin": "^3.2.0",
     "rimraf": "^2.6.2",
-    "swagger-typescript-codegen": "^1.4.1",
-    "ts-loader": "^4.3.0",
-    "ts-node": "^6.0.3",
-    "tsconfig-paths": "^3.3.2",
-    "typescript": "^2.8.3",
-    "webpack": "^4.8.3",
-    "webpack-cli": "^2.1.3",
+    "ts-loader": "^4.4.2",
+    "ts-node": "^7.0.0",
+    "tsconfig-paths": "^3.4.1",
+    "typescript": "^2.9.2",
+    "webpack": "^4.14.0",
+    "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^3.1.4"
   }
 }

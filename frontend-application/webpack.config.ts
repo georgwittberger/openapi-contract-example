@@ -8,9 +8,8 @@ const config: webpack.Configuration = {
   devServer: {
     port: 10080,
     proxy: {
-      '/api': {
-        target: 'http://localhost:10081',
-        pathRewrite: { '^/api': '' }
+      '/api/v1': {
+        target: 'http://localhost:10081'
       }
     }
   },
