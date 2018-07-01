@@ -1,4 +1,4 @@
-package io.github.georgwittberger.openapiexample.openapicontractbffapplication.message;
+package io.github.georgwittberger.openapiexample.openapicontractbffapplication.messages;
 
 import io.github.georgwittberger.openapiexample.openapicontractmicroserviceapplication.api.client.MessagesApi;
 import org.springframework.cloud.openfeign.FeignClient;

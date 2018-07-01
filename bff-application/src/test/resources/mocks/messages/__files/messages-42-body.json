@@ -1,0 +1,10 @@
+{
+  "data": {
+    "type": "messages",
+    "id": "42",
+    "attributes": {
+      "text": "Hello World",
+      "lastModified": "2018-07-01T17:19:13.0673285+02:00"
+    }
+  }
+}

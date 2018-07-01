@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/api/v1/messages/42",
+    "headers": {
+      "Accept": {
+        "equalTo": "application/json"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "messages-42-body.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

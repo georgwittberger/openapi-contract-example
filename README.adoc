@@ -29,6 +29,7 @@ The https://projects.spring.io/spring-boot/[Spring Boot] application in the subd
 * The provided JSON-API is defined using the OpenAPI specification file `src/main/resources/static/api/v1/microservice-api.json`.
 * During the Maven build process the https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator-maven-plugin[`openapi-generator-maven-plugin`] is used to generate a Spring-annotated Java interface and Java model classes for the response data structure directly from the specification file.
 * The generated Java interface is implemented by the `MessagesController` class. This controller implementation is additionally annotated with `@RequestMapping("/api/v1")` to serve the API underneath that base path.
+* There is an automated test for the controller implementation in the `MessagesControllerTests` class to verify the runtime API compliance.
 
 === Design decisions for the microservice
 
@@ -46,10 +47,12 @@ The https://projects.spring.io/spring-boot/[Spring Boot] application in the subd
 * The provided API is defined using the OpenAPI specification file `src/main/resources/static/api/v1/bff-api.json`.
 * During the Maven build process the https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator-maven-plugin[`openapi-generator-maven-plugin`] is used to generate a Spring-annotated Java interface and Java model classes for the response data structure directly from the BFF specification file.
 * The generated Java interface for the BFF API is implemented by the `MessagesController` class. This controller implementation is additionally annotated with `@RequestMapping("/api/v1")` to serve the API underneath that base path.
+* There is an automated test for the controller implementation in the `MessagesControllerTests` class to verify the runtime API compliance.
 * The consumed JSON-API of the microservice is defined by the OpenAPI specification file `src/main/openapi/microservice-api.json`. It is an exact copy of the file from the microservice application.
 * During the Maven build process the https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator-maven-plugin[`openapi-generator-maven-plugin`] is used to generate a Java interface from that microservice specification file.
 * The generation of the Java interface for the microservice API is customized by the Mustache template located at `src/main/openapi/templates/api.mustache`. It is a slightly modified version of the https://github.com/OpenAPITools/openapi-generator/blob/v3.0.3/modules/openapi-generator/src/main/resources/JavaSpring/api.mustache[original template].
 * The generated Java interface for the microservice API is extended by the `MessagesClient` interface to implement an https://github.com/OpenFeign/feign[OpenFeign] client named "messages" which is used by the BFF to access the API of the microservice.
+* There is an automated test for the OpenFeign client in the `MessagesClientTests` class to verify the runtime API compliance. The test is supported by an embedded http://wiremock.org/[WireMock] server which is configured by the files located in `src/test/resources/mocks/messages`.
 
 === Design decisions for the backend-for-frontend
 

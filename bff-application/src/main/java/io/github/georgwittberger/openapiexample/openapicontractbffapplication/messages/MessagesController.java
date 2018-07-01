@@ -1,4 +1,4 @@
-package io.github.georgwittberger.openapiexample.openapicontractbffapplication.message;
+package io.github.georgwittberger.openapiexample.openapicontractbffapplication.messages;
 
 import io.github.georgwittberger.openapiexample.openapicontractbffapplication.api.handler.MessagesApi;
 import io.github.georgwittberger.openapiexample.openapicontractbffapplication.api.model.MessageResponse;
